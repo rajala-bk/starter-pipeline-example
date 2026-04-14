@@ -18,16 +18,21 @@
   #     buildkite-agent meta-data get "foo"
   #   key: get
   #   depends_on: set
+  # steps:
+  # - label: "First"
+  #   command: echo "I am First"
+
+  # - wait:
+
+  # - label: "Second"
+  #   command: echo "I am Second, but awaited for First to run"
+
+  # - wait:
+
+  # - label: "Third"
+  #   command: echo "I am Third, but awaited for Second to run"
+
   steps:
-  - label: "First"
-    command: echo "I am First"
-
-  - wait:
-
-  - label: "Second"
-    command: echo "I am Second, but awaited for First to run"
-
-  - wait:
-
-  - label: "Third"
-    command: echo "I am Third, but awaited for Second to run"
+  - command: "echo parallel test"
+    label: "Test %n"
+    parallelism: 5
