@@ -1,4 +1,4 @@
-steps:
+# steps:
   # - label: ":ballot_box_with_ballot:"
   #   command: ./src/generate-and-store-number.sh
 
@@ -6,15 +6,28 @@ steps:
 
   # - label: ":desktop_computer:"
   #   command: ./src/fetch-and-display-number.sh
-  - label: ":white_check_mark: Set metadata"
-    command: |
-      echo "Set metadata"
-      buildkite-agent meta-data set "foo" "bar"
-    key: set
+  # - label: ":white_check_mark: Set metadata"
+  #   command: |
+  #     echo "Set metadata"
+  #     buildkite-agent meta-data set "foo" "bar"
+  #   key: set
 
-  - label: ":rocket: Get metadata"
-    command: |
-      echo "Get metadata"
-      buildkite-agent meta-data get "foo"
-    key: get
-    depends_on: set
+  # - label: ":rocket: Get metadata"
+  #   command: |
+  #     echo "Get metadata"
+  #     buildkite-agent meta-data get "foo"
+  #   key: get
+  #   depends_on: set
+  steps:
+  - label: "First"
+    command: echo "I am First"
+
+  - wait:
+
+  - label: "Second"
+    command: echo "I am Second, but awaited for First to run"
+
+  - wait:
+
+  - label: "Third"
+    command: echo "I am Third, but awaited for Second to run"
