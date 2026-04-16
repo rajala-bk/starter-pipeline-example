@@ -17,5 +17,6 @@ steps:
 
   - label: ":arrow_right: Triggering"
     command: echo "pipeline triggered"
+    branches: main
     trigger: triggered
     depends_on: deploy
