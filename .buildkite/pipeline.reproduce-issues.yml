@@ -1,10 +1,14 @@
 steps:
   - label: ":construction_worker: Build"
-    command: echo "Build the rocket"
+    command: echo "Rebuilding the rocket"
     key: build
+
+  - label: ":white_check_mark: Test"
+    command: echo "After rebuild, we test"
+    key: test
 
   - label: ":arrow_right: Triggering"
     command: echo "pipeline triggered"
     branches: main
     trigger: triggered
-    depends_on: build
+    depends_on: test
