@@ -15,6 +15,20 @@
 #     key: deploy
 #     depends_on: test
 
+# steps:
+#   - label: "Print value of STEPS_COUNT"
+#     command: echo $$STEPS_COUNT
+
+
 steps:
-  - label: "Print value of STEPS_COUNT"
-    command: echo $$STEPS_COUNT
+  - label: "annotate"
+    command: "true"
+    plugins:
+      - bugcrowd/test-summary#v1.8.0:
+          inputs:
+            - label: rspec
+              artifact_path: artifacts/rspec*
+              type: junit
+          formatter:
+            type: details
+          context: test-summary
