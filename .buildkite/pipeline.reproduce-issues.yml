@@ -16,5 +16,6 @@ steps:
     depends_on: test
 
   - label: ":arrow_right: Triggering"
+    command: echo "pipeline triggered"
     trigger: triggered
     depends_on: deploy
