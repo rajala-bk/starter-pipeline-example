@@ -20,15 +20,15 @@
 #     command: echo $$STEPS_COUNT
 
 
-steps:
-  - label: ":docker: configure image tag"
-    key: tag:create
-    commands:
-      - TAG=$(some commands)
-      - buildkite-agent meta-data set "TAG" "\${TAG}"
-      - buildkite-agent step update "label" ":sunglasses: TAG=\${TAG}"
-    agents:
-      queue: ${BUILD_AGENT}
+# steps:
+#   - label: ":docker: configure image tag"
+#     key: tag:create
+#     commands:
+#       - TAG=$(some commands)
+#       - buildkite-agent meta-data set "TAG" "\${TAG}"
+#       - buildkite-agent step update "label" ":sunglasses: TAG=\${TAG}"
+#     agents:
+#       queue: ${BUILD_AGENT}
   # - label: "annotate"
   #   command: "true"
   #   plugins:
@@ -40,3 +40,14 @@ steps:
   #         formatter:
   #           type: details
   #         context: test-summary
+
+
+steps:
+  - label: ":white_check_mark: Test"
+    command: echo "Test the rocket"
+    key: test
+
+  - label: ":rocket: Deploy event trigger"
+    branches: main
+    trigger: Pipeline_2
+    depends_on: test
