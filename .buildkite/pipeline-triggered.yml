@@ -1,0 +1,9 @@
+steps:
+  - label: ":construction_worker: Build"
+    command: echo "Ran the pipeline"
+    key: build
+
+  - label: ":white_check_mark: Test"
+    command: echo "Test pipeline successful"
+    key: test
+    depends_on: build
