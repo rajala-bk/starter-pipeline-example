@@ -6,9 +6,10 @@ steps:
   - label: ":white_check_mark: Test"
     command: echo "After rebuild, we test"
     key: test
+    depends_on: build
 
   - label: ":arrow_right: Triggering"
-    command: echo "pipeline triggered"
-    branches: main
     trigger: triggered
-    depends_on: test
+    # async: false
+    branches: main
+    depends_on: build
