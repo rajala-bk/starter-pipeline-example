@@ -1,5 +1,7 @@
 steps:
     - label: annotate
+      commands:
+        - echo "testing"
       plugins:
         - bugcrowd/test-summary#v1.11.0:
             inputs:
