@@ -1,6 +1,6 @@
 steps:
   - label: "annotate"
-    # command: "true"
+    command: "true"
     plugins:
       - bugcrowd/test-summary#v1.8.0:
           inputs:
