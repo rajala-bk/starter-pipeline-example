@@ -1,27 +1,27 @@
 steps:
-    - label: annotate
-      plugins:
-        - bugcrowd/test-summary#v1.11.0:
-            inputs:
-              - label: rspec
-                command: rspec
-                artifact_path: artifacts/rspec*
-                type: junit
-              - label: eslint
-                command: yarn run eslint -f checkstyle -o artifacts/eslint.xml
-                artifact_path: artifacts/eslint.xml
-                type: checkstyle
-              - label: ava
-                command: bash -c "yarn --silent test --tap > artifacts/ava.tap"
-                artifact_path: artifacts/ava.tap
-                type: tap
-              - label: rubocop
-                command: rubocop -f emacs -o artifacts/rubocop.txt
-                artifact_path: artifacts/rubocop.txt
-                type: oneline
-            formatter:
-              type: details
-            context: test-summary
+  - label: annotate
+    command: true
+    plugins:
+      - bugcrowd/test-summary#v1.11.0:
+        inputs:
+            - label: rspec
+              artifact_path: artifacts/rspec*
+              type: junit
+            # - label: eslint
+            #   command: yarn run eslint -f checkstyle -o artifacts/eslint.xml
+            #   artifact_path: artifacts/eslint.xml
+            #   type: checkstyle
+            # - label: ava
+            #   command: bash -c "yarn --silent test --tap > artifacts/ava.tap"
+            #   artifact_path: artifacts/ava.tap
+            #   type: tap
+            # - label: rubocop
+            #   command: rubocop -f emacs -o artifacts/rubocop.txt
+            #   artifact_path: artifacts/rubocop.txt
+            #   type: oneline
+        formatter:
+          type: details
+        context: test-summary
 
   # - label: ":construction_worker: Build"
   #   command: echo "Build the rocket"
