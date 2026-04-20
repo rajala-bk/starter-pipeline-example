@@ -1,15 +1,23 @@
 steps:
-  - label: "annotate"
-    command: "true"
-    plugins:
-      - bugcrowd/test-summary#v1.8.0:
-          inputs:
-            - label: rspec
-              artifact_path: artifacts/rspec*
-              type: junit
-          formatter:
-            type: details
-          context: test-summary
+    - label: annotate
+      plugins:
+        - bugcrowd/test-summary#v1.11.0:
+            inputs:
+              - label: rspec
+                artifact_path: artifacts/rspec*
+                type: junit
+              - label: eslint
+                artifact_path: artifacts/eslint.xml
+                type: checkstyle
+              - label: ava
+                artifact_path: artifacts/ava.tap
+                type: tap
+              - label: rubocop
+                artifact_path: artifacts/rubocop.txt
+                type: oneline
+            formatter:
+              type: details
+            context: test-summary
 
   # - label: ":construction_worker: Build"
   #   command: echo "Build the rocket"
