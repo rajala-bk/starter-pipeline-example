@@ -20,17 +20,13 @@
   #   queue: "${BUILD_AGENT}"
 
 
-  steps:
+steps:
   - label: ":mag: Capture Deprecation Warnings"
     command: |
-      # Run your command and capture all output (stdout + stderr)
-      npm install
-      your-build-command 2>&1 | tee build.log
+      npm install 2>&1 | tee build.log
 
-      # Filter for unique deprecation warnings
       DEPRECATIONS=$(grep -i "deprecat" build.log | sort -u)
 
-      # Only create annotation if deprecation warnings were found
       if [ -n "$DEPRECATIONS" ]; then
         echo "$DEPRECATIONS" | buildkite-agent annotate \
           --style "warning" \
@@ -41,5 +37,8 @@
           --style "success" \
           --context "deprecations"
       fi
+    plugins:
+      - docker#v5.9.0:
+          image: "node:18"
     agents:
       queue: "testqueue"
