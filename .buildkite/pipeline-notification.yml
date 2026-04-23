@@ -1,12 +1,12 @@
-steps:
-  - label: ":docker: configure image tag"
-    key: tag:create
-    command: |
-      TAG=$(echo "newtag")
-      buildkite-agent meta-data set "TAG" "$$TAG"
-      buildkite-agent step update "label" ":sunglasses: TAG=$$TAG}"
-    # agents:
-    #   queue: ${BUILD_AGENT}
+# steps:
+#   - label: ":docker: configure image tag"
+#     key: tag:create
+#   - commands:
+#   - TAG=$(echo "newtag")
+#       - buildkite-agent meta-data set "TAG" "$$TAG"
+#       - buildkite-agent step update "label" ":sunglasses: TAG=$$TAG"
+#     agents:
+      # queue: ${BUILD_AGENT}
   #   - label: ":docker: configure image tag"
   # key: "tag:create"
   # command: |
@@ -18,3 +18,26 @@ steps:
   #   buildkite-agent step update "tag:create"  "label: \":sunglasses: TAG=${TAG}\""
   # agents:
   #   queue: "${BUILD_AGENT}"
+
+
+  steps:
+  - label: ":mag: Capture Deprecation Warnings"
+    command: |
+      # Run your command and capture all output (stdout + stderr)
+      npm install
+      your-build-command 2>&1 | tee build.log
+
+      # Filter for unique deprecation warnings
+      DEPRECATIONS=$(grep -i "deprecat" build.log | sort -u)
+
+      # Only create annotation if deprecation warnings were found
+      if [ -n "$DEPRECATIONS" ]; then
+        echo "$DEPRECATIONS" | buildkite-agent annotate \
+          --style "warning" \
+          --context "deprecations" \
+          --append
+      else
+        buildkite-agent annotate "No deprecation warnings found :white_check_mark:" \
+          --style "success" \
+          --context "deprecations"
+      fi
