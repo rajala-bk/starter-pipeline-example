@@ -20,22 +20,39 @@
   #   queue: "${BUILD_AGENT}"
 
 
+# steps:
+#   - label: ":mag: Test Annotation"
+#     command: |
+#       echo "DEPRECATION WARNING: this is a test deprecation message" 2>&1 | tee build.log
+
+#       DEPRECATIONS=$(grep -i "deprecat" build.log | sort -u)
+
+#       if [ -n "$DEPRECATIONS" ]; then
+#         echo "$DEPRECATIONS" | buildkite-agent annotate \
+#           --style "warning" \
+#           --context "deprecations" \
+#           --append
+#       else
+#         buildkite-agent annotate "No deprecation warnings found :white_check_mark:" \
+#           --style "success" \
+#           --context "deprecations"
+#       fi
+#     agents:
+#       queue: "testqueue"
+
 steps:
-  - label: ":mag: Test Annotation"
+  - label: "Lint the code"
+    command: "echo 'Linting code...' && false"
+    key: "lint-code"
+  - label: "Block the build if linting fails"
+    depends_on: "lint-code"
     command: |
-      echo "DEPRECATION WARNING: this is a test deprecation message" 2>&1 | tee build.log
-
-      DEPRECATIONS=$(grep -i "deprecat" build.log | sort -u)
-
-      if [ -n "$DEPRECATIONS" ]; then
-        echo "$DEPRECATIONS" | buildkite-agent annotate \
-          --style "warning" \
-          --context "deprecations" \
-          --append
-      else
-        buildkite-agent annotate "No deprecation warnings found :white_check_mark:" \
-          --style "success" \
-          --context "deprecations"
+      if [ $$(buildkite-agent step get "outcome" --step "lint-code") != "passed" ]; then
+         cat <<- YAML | buildkite-agent pipeline upload
+         steps:
+           - block: "Blocking build due to lint failure"
+      YAML
       fi
-    agents:
-      queue: "testqueue"
+    allow_dependency_failure: true
+  - label: "Run tests"
+    command: "echo 'Testing!'"
