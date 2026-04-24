@@ -40,19 +40,26 @@
 #     agents:
 #       queue: "testqueue"
 
+# steps:
+#   - label: "Lint the code"
+#     command: "echo 'Linting code...' && false"
+#     key: "lint-code"
+#   - label: "Block the build if linting fails"
+#     depends_on: "lint-code"
+#     command: |
+#       if [ $$(buildkite-agent step get "outcome" --step "lint-code") != "passed" ]; then
+#          cat <<- YAML | buildkite-agent pipeline upload
+#          steps:
+#            - block: "Blocking build due to lint failure"
+#       YAML
+#       fi
+#     allow_dependency_failure: true
+#   - label: "Run tests"
+#     command: "echo 'Testing!'"
+
 steps:
-  - label: "Lint the code"
-    command: "echo 'Linting code...' && false"
-    key: "lint-code"
-  - label: "Block the build if linting fails"
-    depends_on: "lint-code"
-    command: |
-      if [ $$(buildkite-agent step get "outcome" --step "lint-code") != "passed" ]; then
-         cat <<- YAML | buildkite-agent pipeline upload
-         steps:
-           - block: "Blocking build due to lint failure"
-      YAML
-      fi
-    allow_dependency_failure: true
-  - label: "Run tests"
-    command: "echo 'Testing!'"
+  - label: ":construction_worker: Build"
+    command: echo "Build the rocket"
+    env:
+      MY_VAR: "test_env_var"
+      ANOTHER_VAR: "test_env_another"
