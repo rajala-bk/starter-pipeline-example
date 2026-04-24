@@ -23,16 +23,8 @@
 steps:
   - label: ":mag: Test Annotation"
     command: |
-      node -e "process.emitWarning('This API is deprecated', 'DeprecationWarning')" 2>&1 | tee build.log
-    plugins:
-      - docker#v5.9.0:
-          image: "node:18"
-    key: test
-    agents:
-      queue: "testqueue"
+      echo "DEPRECATION WARNING: this is a test deprecation message" 2>&1 | tee build.log
 
-  - label: ":pencil2: Annotate"
-    command: |
       DEPRECATIONS=$(grep -i "deprecat" build.log | sort -u)
 
       if [ -n "$DEPRECATIONS" ]; then
@@ -45,6 +37,5 @@ steps:
           --style "success" \
           --context "deprecations"
       fi
-    depends_on: test
     agents:
       queue: "testqueue"
