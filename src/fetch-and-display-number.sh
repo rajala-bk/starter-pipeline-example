@@ -1,5 +1,4 @@
 #!/bin/bash
-
 action=${1:-}
 
 if [[ "$action" == "collect" ]]; then
