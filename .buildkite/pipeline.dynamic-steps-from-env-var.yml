@@ -2,6 +2,9 @@ steps:
   - label: ":pipeline:"
     command: ./src/generate-steps-from-env-var.sh | buildkite-agent pipeline upload
 
+  - label: ":rocket: Deploy event trigger"
+    command: printenv | sort
+
   - wait
 
   - label: ":desktop_computer:"
