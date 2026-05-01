@@ -61,4 +61,4 @@ steps:
   notify:
     - github_commit_status:
         context: "final commit message testing"
-      # if: step.outcome != "passed"
+      if: step.outcome != "passed"
