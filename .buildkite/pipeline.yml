@@ -64,5 +64,8 @@
 #       if: step.outcome == "hard_failed"
 
 steps:
-  - label: "Sleep 5 minutes"
-    command: "sleep 300"
+  - label: "Example Test - pass"
+    command: echo "Hello!"
+    notify:
+      # Notify channel
+      - slack: "Buildkite#richard-test"
