@@ -54,6 +54,10 @@
 #     trigger: Pipeline_2
 #     depends_on: test
 
+
 steps:
-  - label: "Print value of STEPS_COUNT"
-    command: echo $$STEPS_COUNT
+- label: ":white_check_mark: Test"
+  command: "./src/script.sh"
+  notify:
+    - github_commit_status:
+        context: "custom commit message testing"
