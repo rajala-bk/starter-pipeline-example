@@ -61,3 +61,4 @@ steps:
   notify:
     - github_commit_status:
         context: "custom commit message testing"
+      if: step.outcome != "passed"
