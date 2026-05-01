@@ -1,3 +1,4 @@
 #!/bin/bash
-echo "Script completed successfully."
-exit 0
+echo "Running script..."
+echo "Intentionally failing for notification test."
+exit 1
