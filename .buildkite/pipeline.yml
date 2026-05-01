@@ -60,5 +60,5 @@ steps:
   command: "./src/script.sh"
   notify:
     - github_commit_status:
-        context: "custom commit message testing"
+        context: "script passes"
       if: step.outcome != "passed"
