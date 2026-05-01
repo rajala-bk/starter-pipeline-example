@@ -1,0 +1,9 @@
+steps:
+  - label: ":construction_worker: Build"
+    command: echo "Rebuilding the rocket"
+    key: build
+
+  - label: ":white_check_mark: Test"
+    command: echo "After rebuild, we test"
+    key: test
+    depends_on: build
