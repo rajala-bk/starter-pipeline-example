@@ -55,10 +55,14 @@
 #     depends_on: test
 
 
+# steps:
+# - label: ":white_check_mark: Test"
+#   command: "./src/script.sh"
+#   notify:
+#     - github_commit_status:
+#         context: "final commit message testing"
+#       if: step.outcome == "hard_failed"
+
 steps:
-- label: ":white_check_mark: Test"
-  command: "./src/script.sh"
-  notify:
-    - github_commit_status:
-        context: "final commit message testing"
-      if: step.outcome == "hard_failed"
+  - label: "Sleep 5 minutes"
+    command: "sleep 300"
