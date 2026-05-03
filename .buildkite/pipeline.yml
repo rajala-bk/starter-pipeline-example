@@ -1,17 +1,17 @@
-# steps:
-#   - label: "Sleep 5 minutes"
-#     command: "sleep 300"
-
 steps:
-  - label: "My Test"
-    if: build.env("TEST_VAR_CUSTOM") == null
-    command:
-      - "python3 ./src/run.py"
-    agents:
-      - "fixture=${MY_FIXTURE}"
-      - "queue=question"
-    artifact_paths:
-      - "_files/*"
+  - label: "Sleep 5 minutes"
+    command: "sleep 300"
+
+# steps:
+#   - label: "My Test"
+#     if: build.env("TEST_VAR_CUSTOM") == null
+#     command:
+#       - "python3 ./src/run.py"
+#     agents:
+#       - "fixture=${MY_FIXTURE}"
+#       - "queue=question"
+#     artifact_paths:
+#       - "_files/*"
 
 # steps:
 #   - label: "My Test"
