@@ -3,11 +3,13 @@
 #     command: "sleep 300"
 
 steps:
-  - label: ":construction_worker: Build"
-    command: echo "Rebuilding the rocket"
-    key: build
-
-  - label: ":white_check_mark: Test"
-    command: echo "After rebuild, we test"
-    key: test
-    depends_on: build
+  - label: "My Test"
+    if: build.env("TEST_VAR_CUSTOM") == null
+    command:
+      - "poetry install"
+      - "poetry run python ./src/run.py --use-env-vars"
+    agents:
+      - "fixture=${MY_FIXTURE}"
+      - "queue=testqueue"
+    artifact_paths:
+      - "_files/*"
