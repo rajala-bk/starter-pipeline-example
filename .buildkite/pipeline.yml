@@ -2,21 +2,20 @@
 #   - label: "Sleep 5 minutes"
 #     command: "sleep 300"
 
-# steps:
-#   - label: "My Test"
-#     if: build.env("TEST_VAR_CUSTOM") == null
-#     command:
-#       - "poetry install"
-#       - "poetry run python ./src/run.py --use-env-vars"
-#     agents:
-#       - "fixture=${MY_FIXTURE}"
-#       - "queue=testqueue"
-#     artifact_paths:
-#       - "_files/*"
-
 steps:
   - label: "My Test"
-    command: "echo Testing agent selection with MY_FIXTURE=${MY_FIXTURE}"
+    if: build.env("TEST_VAR_CUSTOM") == null
+    command:
+      - "python3 ./src/run.py"
     agents:
       - "fixture=${MY_FIXTURE}"
       - "queue=testqueue"
+    artifact_paths:
+      - "_files/*"
+
+# steps:
+#   - label: "My Test"
+#     command: "echo Testing agent selection with MY_FIXTURE=${MY_FIXTURE}"
+#     agents:
+#       - "fixture=${MY_FIXTURE}"
+#       - "queue=testqueue"
