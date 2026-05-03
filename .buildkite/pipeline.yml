@@ -64,10 +64,8 @@
 #       if: step.outcome == "hard_failed"
 
 steps:
-  - label: "Slack mention"
-    command: echo "Sending a notification with a mention"
+  - label: "Example Test - pass"
+    command: echo "Hello!"
     notify:
-      - slack:
-          channels:
-            - "#richard-test"
-          message: "testing slack message"
+      - slack: "#richard-test"
+
