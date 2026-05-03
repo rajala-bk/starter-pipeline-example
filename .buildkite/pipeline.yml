@@ -63,9 +63,12 @@
 #         context: "final commit message testing"
 #       if: step.outcome == "hard_failed"
 
-steps:
-  - label: "Example Test - pass"
-    command: echo "Hello!"
-    notify:
-      - slack: "#richard-test"
+# steps:
+#   - label: "Example Test - pass"
+#     command: echo "Hello!"
+#     notify:
+#       - slack: "#richard-test"
 
+steps:
+  - label: "Sleep 5 minutes"
+    command: "sleep 300"
