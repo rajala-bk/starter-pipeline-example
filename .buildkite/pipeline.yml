@@ -1,6 +1,6 @@
 steps:
-  - label: "Sleep 5 minutes"
-    command: "sleep 300"
+  - label: "Test"
+    command: "echo hello"
 
 # steps:
 #   - label: "My Test"
