@@ -1,8 +1,6 @@
 steps:
   - label: "Test"
     command: "echo hello"
-
-
 # steps:
 #   - label: "My Test"
 #     if: build.env("TEST_VAR_CUSTOM") == null
