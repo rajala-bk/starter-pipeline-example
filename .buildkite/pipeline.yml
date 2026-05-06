@@ -1,6 +1,6 @@
 steps:
   - label: "Test"
-    command: "echo hello"
+    command: "echo Testing github conditionals"
 # steps:
 #   - label: "My Test"
 #     if: build.env("TEST_VAR_CUSTOM") == null
