@@ -1,4 +1,5 @@
 #!/bin/bash
-echo "Running script..."
-echo "Intentionally failing for notification test."
+# flaky.sh
+echo "Running..."
+sleep 20
 exit 1
