@@ -1,6 +1,11 @@
 steps:
-  - label: "Test"
-    command: "echo Testing github conditionals"
+  - command: "./src/flaky.sh"
+    soft_fail:
+      - exit_status: 1
+    retry:
+      automatic:
+        - exit_status: 1
+          limit: 3
 # steps:
 #   - label: "My Test"
 #     if: build.env("TEST_VAR_CUSTOM") == null
