@@ -1,6 +1,6 @@
 steps:
   - command: "./src/flaky.sh"
-    soft_fail: true
+    hard fail: true
     retry:
       automatic:
         - exit_status: 1
