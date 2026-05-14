@@ -1,9 +1,9 @@
-steps:
-  - command: "./src/flaky.sh"
-    retry:
-      automatic:
-        - exit_status: 1
-          limit: 3
+# steps:
+#   - command: "./src/flaky.sh"
+#     retry:
+#       automatic:
+#         - exit_status: 1
+#           limit: 3
 # steps:
 #   - label: "My Test"
 #     if: build.env("TEST_VAR_CUSTOM") == null
@@ -21,3 +21,10 @@ steps:
 #     agents:
 #       - "fixture=${MY_FIXTURE}"
 #       - "queue=testqueue"
+
+steps:
+  - label: "Test retry status"
+    command: "exit 1"
+    retry:
+      automatic:
+        limit: 3
